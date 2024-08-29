@@ -8,7 +8,13 @@ import re
 # Load environment variables
 load_dotenv()
 
-# Set up pytesseract path if necessary
+//
+#base_dir = os.path.dirname(__file__)
+
+# Construct the relative path to the Tesseract executable
+#tesseract_path = os.path.join(base_dir, 'Tesseract1-OCR', 'tesseract.exe')
+//
+#Set up pytesseract path if necessary
 tesseract_path = os.getenv('TESSERACT_CMD_PATH', r'Tesseract1-OCR\tesseract.exe')
 
 pytesseract.pytesseract.tesseract_cmd = tesseract_path
