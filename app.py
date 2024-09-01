@@ -1,33 +1,22 @@
 from flask import Flask, render_template, request, jsonify
 import os
-import pdf2image
-import pytesseract
-from dotenv import load_dotenv
 import re
+import fitz  # PyMuPDF
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-//
-#base_dir = os.path.dirname(__file__)
-
-# Construct the relative path to the Tesseract executable
-#tesseract_path = os.path.join(base_dir, 'Tesseract1-OCR', 'tesseract.exe')
-//
-#Set up pytesseract path if necessary
-tesseract_path = os.getenv('TESSERACT_CMD_PATH', r'Tesseract1-OCR\tesseract.exe')
-
-pytesseract.pytesseract.tesseract_cmd = tesseract_path
-
 # Initialize Flask app
 app = Flask(__name__)
 
-# Function to extract text from PDF using OCR
+# Function to extract text from PDF without OCR
 def extract_text_from_pdf(file):
-    images = pdf2image.convert_from_bytes(file.read())
+    pdf_document = fitz.open(stream=file.read(), filetype="pdf")
     text = ""
-    for image in images:
-        text += pytesseract.image_to_string(image)
+    for page_num in range(len(pdf_document)):
+        page = pdf_document.load_page(page_num)
+        text += page.get_text()
     return text.strip()
 
 # Function to preprocess text by removing special characters and converting to lowercase
