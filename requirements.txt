@@ -1,4 +1,4 @@
-﻿annotated-types==0.7.0
+annotated-types==0.7.0
 blinker==1.8.2
 blis==0.7.11
 catalogue==2.0.10
@@ -9,6 +9,7 @@ cloudpathlib==0.18.1
 colorama==0.4.6
 confection==0.1.5
 cymem==2.0.8
+PyMuPDF==1.23.1
 gunicorn==23.0.0
 Flask==3.0.3
 idna==3.8
